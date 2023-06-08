@@ -1,0 +1,23 @@
+{
+  "name": "feedify",
+  "version": "1.0.0",
+  "description": "A simple, yet powerful, utility to create an Atom Feed from your HTML files.",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Tim Rauhut",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "xmlbuilder2": "^3.1.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.3"
+  }
+}
