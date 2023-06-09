@@ -1,5 +1,5 @@
 {
-  "name": "feedify",
+  "name": "@timrauhut/feedify",
   "version": "1.0.0",
   "description": "A simple, yet powerful, utility to create an Atom Feed from your HTML files.",
   "main": "dist/index.js",
@@ -7,6 +7,10 @@
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timrauhut/feedify.git"
   },
   "keywords": [],
   "author": "Tim Rauhut",
