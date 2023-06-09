@@ -5,13 +5,13 @@ A simple, yet powerful, utility to create an Atom Feed from your HTML files. It 
 ## Installation
 
 ```sh
-npm install feedify
+npm install @timrauhut/feedify
 ```
 
 ## Usage
 
 ```javascript
-import generateFeed from 'feedify';
+import generateFeed from '@timrauhut/feedify';
 
 const config = {
   htmlDirectory: './path/to/html/files', // Directory containing HTML files
