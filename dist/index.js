@@ -14,18 +14,16 @@ const getHtmlFiles = (dir) => {
         return [];
     });
 };
-const parseHtmlFiles = (htmlFiles) => {
+const parseHtmlFiles = (htmlFiles, selectors) => {
     const entries = [];
     htmlFiles.forEach((html) => {
         const $ = load(html);
-        $('.post').each((_, element) => {
-            const title = $(element).find('.title').text();
-            const url = $(element).find(".url").attr('href') || "";
-            const summary = $(element).find('.summary').text();
-            const date = $(element).find('.date').text();
-            const author = $(element).find('.author').text();
-            entries.push({ title, url, summary, date, author });
-        });
+        const title = $(selectors.title).text();
+        const url = $(selectors.url).attr('href') || "";
+        const summary = $(selectors.summary).text();
+        const date = $(selectors.date).text();
+        const author = $(selectors.author).text();
+        entries.push({ title, url, summary, date, author });
     });
     return entries;
 };
@@ -54,7 +52,7 @@ const createAtomFeed = (entries, feedTitle, feedURL) => {
 const generateFeed = (config) => {
     try {
         const htmlFiles = getHtmlFiles(config.htmlDirectory);
-        const entries = parseHtmlFiles(htmlFiles);
+        const entries = parseHtmlFiles(htmlFiles, config.selectors);
         const atomFeed = createAtomFeed(entries, config.feedTitle, config.feedURL);
         fs.writeFileSync(config.outputFilePath, atomFeed);
     }

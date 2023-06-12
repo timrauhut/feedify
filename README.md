@@ -18,6 +18,13 @@ const config = {
   outputFilePath: 'path/to/output/atom_feed.xml', // Output path for the generated Atom feed
   feedURL: 'https://example.com/feed.xml', // URL for your Atom feed
   feedTitle: 'Example Feed', // Title for your Atom feed
+  selectors: {
+    title: '.title', // Title selector for your post
+    url: '.url', // URL selector for your post
+    summary: '.summary', // Summary selector for your post
+    date: '.date', // Date selector for your post
+    author: '.author'// Author selector for your post
+  }
 };
 
 generateFeed(config);
@@ -29,6 +36,14 @@ generateFeed(config);
 - `outputFilePath` (string): The file path where your Atom feed will be written.
 - `feedURL` (string): The URL of your feed.
 - `feedTitle` (string): The title of your feed.
+- `selectors`: An object representing the CSS selectors for the necessary elements in the HTML files. This object should have the following properties:
+    - `title`: The CSS selector for the post title.
+    - `url`: The CSS selector for the post URL.
+    - `summary`: The CSS selector for the post summary.
+    - `date`: The CSS selector for the post date.
+    - `author`: The CSS selector for the post author.
+
+Please note that the CSS selectors should directly refer to the respective elements in the HTML files. Each HTML file is considered as a separate post.
 
 ## Functions
 
@@ -46,8 +61,6 @@ Feedify uses the following interfaces:
   - `summary`: Summary of the entry
   - `date`: Date of the entry
   - `author`: Author of the entry
-
-Please note, the Feedify library assumes your HTML files contain the specific class names ('.post', '.title', '.url', '.summary', '.date', '.author') that are used to select and extract the data. Please ensure your HTML files are structured accordingly or modify the library to suit your specific needs.
 
 ## Test
 

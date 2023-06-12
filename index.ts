@@ -11,11 +11,20 @@ interface Entry {
   author: string;
 }
 
+interface Selectors {
+  title: string;
+  url: string;
+  summary: string;
+  date: string;
+  author: string;
+}
+
 interface Config {
   htmlDirectory: string;
   outputFilePath: string;
   feedURL: string;
   feedTitle: string;
+  selectors: Selectors;
 }
 
 const getHtmlFiles = (dir: string): string[] => {
@@ -30,18 +39,16 @@ const getHtmlFiles = (dir: string): string[] => {
   });
 };
 
-const parseHtmlFiles = (htmlFiles: string[]): Entry[] => {
+const parseHtmlFiles = (htmlFiles: string[], selectors: Selectors): Entry[] => {
   const entries: Entry[] = [];
   htmlFiles.forEach((html) => {
     const $ = load(html);
-    $('.post').each((_, element) => {
-      const title = $(element).find('.title').text();
-      const url = $(element).find(".url").attr('href') || "";
-      const summary = $(element).find('.summary').text();
-      const date = $(element).find('.date').text();
-      const author = $(element).find('.author').text();
-      entries.push({ title, url, summary, date, author });
-    });
+    const title = $(selectors.title).text();
+    const url = $(selectors.url).attr('href') || "";
+    const summary = $(selectors.summary).text();
+    const date = $(selectors.date).text();
+    const author = $(selectors.author).text();
+    entries.push({ title, url, summary, date, author });
   });
   return entries;
 };
@@ -74,7 +81,7 @@ const createAtomFeed = (entries: Entry[], feedTitle: string, feedURL: string): s
 const generateFeed = (config: Config): void => {
   try {
     const htmlFiles = getHtmlFiles(config.htmlDirectory);
-    const entries = parseHtmlFiles(htmlFiles);
+    const entries = parseHtmlFiles(htmlFiles, config.selectors);
     const atomFeed = createAtomFeed(entries, config.feedTitle, config.feedURL);
     fs.writeFileSync(config.outputFilePath, atomFeed);
   } catch (error) {
